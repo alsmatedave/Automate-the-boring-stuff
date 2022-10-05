@@ -1,5 +1,5 @@
-import openpyxl
 from openpyxl import Workbook
+
 # from openpyxl.utils import column_index_from_string, get_column_letter   - this is useful to get the column number of e.g 'GA'
 
 import pandas as pd
@@ -16,29 +16,29 @@ ws_empty.append(["Name", "Email", "P-Group", "Number & Calc", "Shape, Space & Me
 
 # -------------------------- Using pandas gather data from the blackboard sheet---------------------------------------
 
-ws_dataframe = pd.read_excel('./Original Audit Files/Y2 Maths Audit Download.xlsx')
+ws_dataframe = pd.read_excel('./Original Audit Files/Y2 Maths Download.xlsx')
 
 for (index, row) in ws_dataframe.iterrows():
     row_info = []
     num_calc_score = 0
     for i in range(1, 15):
         num_calc_score += row[f'Auto Score {i}']
-        num_calc_decimal_score = round(num_calc_score / 25, 2)
+    num_calc_decimal_score = round(num_calc_score / 25, 2)
 
     shape_score = 0
     for i in range(15, 25):
         shape_score += row[f'Auto Score {i}']
-        shape_decimal_score = round(shape_score / 18, 2)
+    shape_decimal_score = round(shape_score / 18, 2)
 
     stats_score = 0
     for i in range(25, 31):
         stats_score += row[f'Auto Score {i}']
-        stats_decimal_score = round(stats_score / 12, 2)
+    stats_decimal_score = round(stats_score / 12, 2)
 
     total_score = 0
     for i in range(1, 31):
         total_score += row[f'Auto Score {i}']
-        total_decimal_score = round(total_score / 55, 2)
+    total_decimal_score = round(total_score / 55, 2)
 
     if row['Answer 31'] == '<Unanswered>':
         p_group = 'unknown'
@@ -52,5 +52,5 @@ for (index, row) in ws_dataframe.iterrows():
 
     ws_empty.append(row_info)
 
-wb_empty.save("./Cleaned Audit Files/Y2-Results-2022.xlsx")
+wb_empty.save("./Cleaned Audit Files/Y2-AuditResults-2022.xlsx")
 
